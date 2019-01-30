@@ -1,14 +1,17 @@
 .play {
   &-area {
-    margin: 0 auto 20px;
     width: fit-content;
+    margin: 50px auto 50px;
+    @media (max-width: 320px) {
+      margin: 10px auto 10px;
+    }
     td {
       width: 50px;
       height: 50px;
     }
     table,
     td {
-      border: 1px solid #333;
+      border: 2px solid #333;
       border-collapse: collapse;
     }
     .black {
@@ -18,35 +21,45 @@
   &-controls {
     margin: 0 auto;
     width: fit-content;
+    .hide {
+      display: none;
+    }
     .controls-container {
-      width: 200px;
-      height: 100px;
       display: grid;
       grid-gap: 10px;
-      cursor: pointer;
       text-align: center;
-      line-height: 100px;
+      width: fit-content;
+      height: fit-content;
       vertical-align: middle;
-      background: LightGray;
       grid-template-rows: 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
+      img {
+        width: 30px;
+        height: 30px;
+        padding: 15px;
+        cursor: pointer;
+      }
       .control1 {
-        background: LightSkyBlue;
         grid-column: 1/4;
+        img {
+          transform: rotate(90deg);
+        }
       }
       .control2 {
-        background: LightSalmon;
       }
       .control3 {
-        background: PaleTurquoise;
       }
       .control4 {
-        background: LightPink;
+        img {
+          transform: rotate(180deg);
+        }
       }
 
       .control5 {
         grid-column: 1/4;
-        background: PaleGreen;
+        img {
+          transform: rotate(-90deg);
+        }
       }
     }
   }

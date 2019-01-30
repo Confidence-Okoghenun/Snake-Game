@@ -1,6 +1,11 @@
 .play-area {
-  margin: 0 auto 20px;
   width: fit-content;
+  margin: 50px auto 50px;
+}
+@media (max-width: 320px) {
+  .play-area {
+    margin: 10px auto 10px;
+  }
 }
 .play-area td {
   width: 50px;
@@ -8,7 +13,7 @@
 }
 .play-area table,
 .play-area td {
-  border: 1px solid #333;
+  border: 2px solid #333;
   border-collapse: collapse;
 }
 .play-area .black {
@@ -18,35 +23,39 @@
   margin: 0 auto;
   width: fit-content;
 }
+.play-controls .hide {
+  display: none;
+}
 .play-controls .controls-container {
-  width: 200px;
-  height: 100px;
   display: grid;
   grid-gap: 10px;
-  cursor: pointer;
   text-align: center;
-  line-height: 100px;
+  width: fit-content;
+  height: fit-content;
   vertical-align: middle;
-  background: LightGray;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
 }
+.play-controls .controls-container img {
+  width: 30px;
+  height: 30px;
+  padding: 15px;
+  cursor: pointer;
+}
 .play-controls .controls-container .control1 {
-  background: LightSkyBlue;
   grid-column: 1/4;
 }
-.play-controls .controls-container .control2 {
-  background: LightSalmon;
+.play-controls .controls-container .control1 img {
+  transform: rotate(90deg);
 }
-.play-controls .controls-container .control3 {
-  background: PaleTurquoise;
-}
-.play-controls .controls-container .control4 {
-  background: LightPink;
+.play-controls .controls-container .control4 img {
+  transform: rotate(180deg);
 }
 .play-controls .controls-container .control5 {
   grid-column: 1/4;
-  background: PaleGreen;
+}
+.play-controls .controls-container .control5 img {
+  transform: rotate(-90deg);
 }
 
 /*# sourceMappingURL=main.css.map */

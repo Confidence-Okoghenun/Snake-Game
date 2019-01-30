@@ -1,9 +1,13 @@
-let $ = document.querySelector.bind(document),
-  $$ = document.querySelectorAll.bind(document),
-  gameGridObj,
+let gameGridObj,
+  snakeMotion,
   snakePosition,
   moveSnakeIntervalId,
-  motionArr = ["up", "down", "left", "right"];
+  firstPlayClickCoounter = 0,
+  $ = document.querySelector.bind(document),
+  motionArr = ["up", "down", "left", "right"],
+  $$ = document.querySelectorAll.bind(document),
+  playBtn = $(".play"),
+  pauseBtn = $(".pause");
 
 const createLocalCopyOfGameGrid = () => {
   let gridObj = {};
@@ -17,10 +21,13 @@ const createLocalCopyOfGameGrid = () => {
   });
   return (gameGridObj = gridObj);
 };
+createLocalCopyOfGameGrid();
+
 const randMotion = max => {
   let i = Number(Math.floor(Math.random() * Math.floor(max)));
   return motionArr[i];
 };
+
 const randPositon = () => {
   let min = Math.ceil(1);
   max1 = Math.floor(Object.keys(gameGridObj).length);
@@ -29,12 +36,14 @@ const randPositon = () => {
   let cl = Number(Math.floor(Math.random() * (max2 - min + 1)) + min);
   return [rw, cl];
 };
+
 const moveSnake = (direction, newPosition) => {
-  let maxRval = Object.keys(gameGridObj).length,
-    maxCval = Object.keys(gameGridObj.rw1).length,
+  let rwPos,
+    clPos,
     prevPosition = "",
-    rwPos,
-    clPos;
+    maxRval = Object.keys(gameGridObj).length,
+    maxCval = Object.keys(gameGridObj.rw1).length;
+
   [rwPos, clPos] = newPosition;
 
   const move = () => {
@@ -46,7 +55,7 @@ const moveSnake = (direction, newPosition) => {
         prevPosition.classList.remove("black");
       }
       prevPosition = position;
-       if (direction === "up") {
+      if (direction === "up") {
         rwPos > 1 ? rwPos-- : (rwPos = maxRval);
       } else if (direction === "right") {
         clPos <= maxCval - 1 ? clPos++ : (clPos = 1);
@@ -55,7 +64,7 @@ const moveSnake = (direction, newPosition) => {
       } else if (direction === "left") {
         clPos > 1 ? clPos-- : (clPos = maxCval);
       }
-      console.log(snakePosition);
+      console.log(direction, snakePosition);
     }
   };
   move();
@@ -64,23 +73,56 @@ const moveSnake = (direction, newPosition) => {
   }, 1000);
 };
 
-createLocalCopyOfGameGrid();
-moveSnake(randMotion(motionArr.length), randPositon());
 
 $$(".control").forEach(control => {
   control.addEventListener("click", e => {
     clearInterval(moveSnakeIntervalId);
     let moveDirection = e.target.getAttribute("data-direction");
     console.log(moveDirection);
-    
+
+    e.target.style.border = "2px solid rgba(0, 0, 0, 0.5)";
+    e.target.style.borderRadius = "50%";
+
+    setTimeout(() => {
+      e.target.style.border = "unset";
+      e.target.style.borderRadius = "unset";
+    }, 100);
+
     if (moveDirection === "up") {
+      snakeMotion = "up";
       moveSnake("up", snakePosition);
-    } else if (moveDirection === "right") {
+      readyPauseSnakeMotion();
+    } else if (moveDirection == "right") {
+      snakeMotion = "right";
       moveSnake("right", snakePosition);
+      readyPauseSnakeMotion();
     } else if (moveDirection === "down") {
+      snakeMotion = "down";
       moveSnake("down", snakePosition);
+      readyPauseSnakeMotion();
     } else if (moveDirection === "left") {
+      snakeMotion = "left";
       moveSnake("left", snakePosition);
+      readyPauseSnakeMotion();
+    } else if (moveDirection === "play") {
+      if (firstPlayClickCoounter === 0) {
+        snakeMotion = randMotion(motionArr.length);
+        moveSnake(snakeMotion, randPositon());
+        firstPlayClickCoounter++;
+      } else {
+        moveSnake(snakeMotion, snakePosition);
+      }
+      readyPauseSnakeMotion();
+    } else if (moveDirection === "pause") {
+      pauseBtn.classList.add("hide");
+      playBtn.classList.remove("hide");
+    }
+
+    function readyPauseSnakeMotion() {
+      if (pauseBtn.classList.contains("hide")) {
+        pauseBtn.classList.remove("hide");
+        playBtn.classList.add("hide");
+      }
     }
   });
 });
