@@ -1,64 +1,71 @@
-.play {
-  &-area {
-    width: fit-content;
-    margin: 50px auto 50px;
-    @media (max-width: 320px) {
-      margin: 10px auto 10px;
-    }
-    td {
-      width: 50px;
-      height: 50px;
-    }
-    table,
-    td {
-      border: 2px solid #333;
-      border-collapse: collapse;
-    }
-    .black {
-      background: black;
-    }
-  }
-  &-controls {
-    margin: 0 auto;
-    width: fit-content;
-    .hide {
-      display: none;
-    }
-    .controls-container {
-      display: grid;
-      grid-gap: 10px;
-      text-align: center;
-      width: fit-content;
-      height: fit-content;
-      vertical-align: middle;
-      grid-template-rows: 1fr 1fr 1fr;
-      grid-template-columns: 1fr 1fr 1fr;
-      img {
-        width: 30px;
-        height: 30px;
-        padding: 15px;
-        cursor: pointer;
-      }
-      .control1 {
-        grid-column: 1/4;
-        img {
-          transform: rotate(90deg);
-        }
-      }
-      .control2 {
-      }
-      .control3 {
-      }
-      .control4 {
-        img {
-          transform: rotate(180deg);
-        }
-      }
+.container {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: space-around;
 
-      .control5 {
-        grid-column: 1/4;
+  .play {
+    &-area {
+      width: fit-content;
+      margin: 50px auto 50px;
+      @media (max-width: 320px) {
+        margin: 10px auto 10px;
+      }
+      td {
+        width: 50px;
+        height: 50px;
+      }
+      table,
+      td {
+        border: 2px solid #333;
+        border-collapse: collapse;
+      }
+      .black {
+        background: black;
+      }
+    }
+    &-controls {
+      margin: 0 auto;
+      width: fit-content;
+      .hide {
+        display: none;
+      }
+      .controls-container {
+        display: grid;
+        grid-gap: 10px;
+        text-align: center;
+        width: fit-content;
+        height: fit-content;
+        vertical-align: middle;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         img {
-          transform: rotate(-90deg);
+          width: 30px;
+          height: 30px;
+          padding: 15px;
+          cursor: pointer;
+        }
+        .control1 {
+          grid-column: 1/4;
+          img {
+            transform: rotate(90deg);
+          }
+        }
+        .control2 {
+        }
+        .control3 {
+        }
+        .control4 {
+          img {
+            transform: rotate(180deg);
+          }
+        }
+
+        .control5 {
+          grid-column: 1/4;
+          img {
+            transform: rotate(-90deg);
+          }
         }
       }
     }
